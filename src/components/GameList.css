@@ -1,0 +1,13 @@
+.accordian-summary-container {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.as-right {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}

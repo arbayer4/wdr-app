@@ -1,0 +1,15 @@
+.nav-container {
+  width: 95vw;
+  padding: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 5px solid black;
+}
+.nav-title {
+  text-decoration: none;
+  font-family: "Fugaz One", cursive;
+  font-size: 50px;
+  color: #9b2226;
+}

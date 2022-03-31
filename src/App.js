@@ -1,24 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState, useEffect} from "react";
+import SignIn from "./components/SignIn";
+import API from "./services/api-config";
+import Layout from "./components/shared/layout/Layout";
+import GameDatePicker from "./components/GameDatePicker";
+import AdminPanel from "./screens/AdminPanel";
+
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+  const [loaded, setLoaded] = useState(false)
+  
+
+  useEffect(()=>{
+    const handleVerify = async () => {
+      try {
+        const resp = await API.get('/logged_in', {withCredentials: true})
+        setLoaded(true)
+        if (resp.data.logged_in && !currentUser){
+          console.log(resp)
+          setCurrentUser(resp.data.user);
+        }else if (!resp.data.logged_in && currentUser){
+          setCurrentUser(null);
+        }
+      } catch (error) {
+        console.error("Check login status error",error);
+        setLoaded(true)
+      }
+    }
+    handleVerify();
+  }, [currentUser]);
+
+  const handleLogout = () => {
+    API.delete("/logout", {withCredentials:true})
+    .then(response => {
+      setCurrentUser(null);
+    })
+    .catch(error => {
+      console.log("logout error", error);
+    })
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Layout user = {currentUser} logout = {handleLogout}>
+    {loaded ? 
+      currentUser ? (<AdminPanel user ={currentUser}/>) : (<SignIn setCurrentUser={setCurrentUser}/>)
+     : <div></div> }
+    </Layout>
     </div>
+    
   );
 }
 
