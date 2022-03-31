@@ -11,9 +11,9 @@ import RemoveCircleTwoToneIcon from '@mui/icons-material/RemoveCircleTwoTone';
 import IconButton from '@mui/material/IconButton';
 import "./GameList.css"
 import { Card } from "@mui/material";
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import { id } from "date-fns/locale";
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
+// import { id } from "date-fns/locale";
 
 function GameList(props) {
   const [games, setGames] = useState([]);

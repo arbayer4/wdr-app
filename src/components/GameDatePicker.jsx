@@ -1,4 +1,3 @@
-import TextField from '@mui/material/TextField';
 // import AdapterDateFns from '@mui/lab/AdapterDateFns';
 // import LocalizationProvider from '@mui/lab/LocalizationProvider';
 // import DatePicker from "@mui/lab/MobileDateTimePicker";
@@ -12,17 +11,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
 import API from "../services/api-config";
 
 function GameDatePicker(props) {
   const [dateValue, setDateValue] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState([]);
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
   const dateOptions ={year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'}
 
   const handleDateSelect = ()=>{
