@@ -3,8 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+import { Link as BRLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Typography from '@mui/material/Typography';
@@ -16,11 +15,11 @@ import API from "../services/api-config";
 
 const theme = createTheme();
 
-export default function SignIn(props) {
+export default function PasswordRecovery(props) {
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
   });
+  const [emailSent, setEmailSent] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -33,19 +32,16 @@ export default function SignIn(props) {
     event.preventDefault();
     const {email, password} = formData;
 
-    API.post("/sessions",
+    API.post("/password-reset",
     {
       user: {
         email: email,
-        password: password,
       }
     },
     {withCredentials: true}
     )
     .then(response => {
-      if (response.data.logged_in) {
-        props.setCurrentUser(response.data.user)
-      }
+      setEmailSent(true)
     })
   };
 
@@ -65,7 +61,7 @@ export default function SignIn(props) {
             <SportsSoccerIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Password Recovery
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -80,18 +76,6 @@ export default function SignIn(props) {
               value={formData.email}
               onChange={handleChange}
             />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="current-password"
-            />
 
             <Button
               type="submit"
@@ -99,15 +83,8 @@ export default function SignIn(props) {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Submit
             </Button>
-            <Grid container direction="row" justifyContent="flex-end" alignItems="center">
-              <Grid item xs={4}>
-                <Link href="/recover-password" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

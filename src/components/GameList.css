@@ -6,8 +6,22 @@
   justify-content: space-between;
 }
 
+.as-left {
+  min-width: 30%;
+  text-align: left;
+}
 .as-right {
+  min-width: 30%;
   display: flex;
   flex-flow: row;
   align-items: center;
+  justify-content: flex-end;
+}
+
+ul.player-list {
+  list-style-type: none;
+  text-align: left;
+}
+ul.player-list li {
+  padding: 5px;
 }

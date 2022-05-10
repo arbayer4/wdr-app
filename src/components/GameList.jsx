@@ -11,27 +11,17 @@ import RemoveCircleTwoToneIcon from '@mui/icons-material/RemoveCircleTwoTone';
 import IconButton from '@mui/material/IconButton';
 import "./GameList.css"
 import { Card } from "@mui/material";
+import { Chip } from '@mui/material';
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
 // import { id } from "date-fns/locale";
 
 function GameList(props) {
-  const [games, setGames] = useState([]);
+  
   const [expand, setExpand] = useState(false);
   const dateOptions ={weekday: 'short', month: 'numeric', day: 'numeric', hour: 'numeric', minute: '2-digit'}
 
-  useEffect(()=>{
-    const getGames = async () => {
-      try {
-        const resp = await API.get('/games', {withCredentials: true})
-        console.log(resp);
-        setGames(resp.data)
-      }catch (error) {
-        console.error("Get games error",error);
-      }
-    }
-    getGames()
-  },[])
+ 
 
   const  handleAddUser = async (gameId) => {
     try {
@@ -41,7 +31,7 @@ function GameList(props) {
         player_id: props.user.id
       },
       {withCredentials: true})
-      setGames(games.map((game)=> {
+      props.setGames(props.games.map((game)=> {
         if(game.id === gameId){
           const update = {...game, players: [...game["players"], resp.data.player]}
           return update
@@ -61,7 +51,7 @@ function GameList(props) {
         player_id: props.user.id
       },
       {withCredentials: true})
-      setGames(games.map((game)=> {
+      props.setGames(props.games.map((game)=> {
         if(game.id === gameId){
           const update = {...game, players: game["players"].filter(player=>player.id!==resp.data.player_id)}
           return update
@@ -87,7 +77,7 @@ function GameList(props) {
       <Typography gutterBottom variant="h5" component="div">
           Scheduled Games
         </Typography>
-      {games.map((game, index)=>(
+      {props.games.map((game, index)=>(
         <Accordion key ={index} expanded = {expand === index}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon onClick = {()=>handleExpand(index)}/>}
@@ -98,8 +88,12 @@ function GameList(props) {
             <div className="as-left">
               <Typography>{new Date(game.date).toLocaleString("en-US", dateOptions)}</Typography>
             </div>
+            <div className="as-center">
+            <Typography sx= {{color: "gray"}}><span style={game.players?.length > 15 ? {color: "red"}: null}>{`${game.players?.length}`}</span>/15 spots filled</Typography>
+
+            </div>
             <div className="as-right">
-              <Typography>{`${game.players?.length}/15`}</Typography>
+              
               {game?.players?.some(player=>player.id===props.user?.id) ? (<IconButton aria-label="remove" color = "error" onClick={()=>handleRemoveUser(game.id)}>
                 <RemoveCircleTwoToneIcon/>
               </IconButton>)
@@ -112,9 +106,11 @@ function GameList(props) {
           </div>
         </AccordionSummary>
         <AccordionDetails>
-          <ul>
-            {game.players.map(player =>(
-              <li>{`${player.order}. ${player.firstname} ${player.lastname}`}</li>
+          <ul className="player-list">
+            {game.players.map((player, index) =>(
+              <li key={index}>{`${index + 1}. ${player.firstname} ${player.lastname}  `}
+               {index >= 15 && <Chip label="Waitlisted" color="error" variant="outlined" /> }
+               {player.id===props.user.id && <Chip label="Me" color="success" variant="outlined" /> }</li>
             ))}
           </ul>
         </AccordionDetails>

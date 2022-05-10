@@ -41,21 +41,16 @@ function GameDatePicker(props) {
 
   const handleSave = async (e) => {
     e.preventDefault()
-    console.log("saving games")
-    await API.post("/games",
-    {
-      games: selectedDates
-    },
-    {withCredentials: true}
-    ).then(response => {
-      console.log(response)
-    })
+    await props.handleSaveGames(selectedDates).then((response)=>
+    setSelectedDates([])
+    )
+  
   }
 
   return (
     <div>
       
-    <Card component="form" onSubmit={handleSave} variant="outlined" sx={{padding: "25px"}}>
+    <Card component="form" onSubmit={handleSave} variant="outlined" sx={{padding: "25px", margin: "10px"}}>
       <CardContent sx={{minWidth:"200px"}}>
       <Typography gutterBottom variant="h5" component="div">
           Add Games

@@ -1,9 +1,14 @@
 import './App.css';
 import {useState, useEffect} from "react";
-import SignIn from "./components/SignIn";
+import SignIn from "./screens/SignIn";
 import API from "./services/api-config";
 import Layout from "./components/shared/layout/Layout";
 import AdminPanel from "./screens/AdminPanel";
+import { Route, Routes } from "react-router-dom";
+import SignUp from "./screens/SignUp";
+import PasswordRecovery from "./screens/PasswordRecovery";
+import NotVerified from "./screens/NotVerified";
+import GeneralUserHome from "./screens/GeneralUserHome";
 
 
 function App() {
@@ -42,9 +47,16 @@ function App() {
   return (
     <div className="App">
     <Layout user = {currentUser} logout = {handleLogout}>
-    {loaded ? 
-      currentUser ? (<AdminPanel user ={currentUser}/>) : (<SignIn setCurrentUser={setCurrentUser}/>)
-     : <div></div> }
+      <Routes>
+        <Route path = "/signup" element={<SignUp setCurrentUser={setCurrentUser}/>}/>
+        <Route path = "/recover-password" element={<PasswordRecovery/>}/>
+          
+        <Route path = "/" element={loaded ? 
+          currentUser ? currentUser.verified ? currentUser.is_admin? (<AdminPanel user ={currentUser}/>) : (<GeneralUserHome user={currentUser}/>):(<NotVerified/>) : (<SignIn setCurrentUser={setCurrentUser}/>)
+          : <div></div> }/>
+          
+      </Routes>
+    
     </Layout>
     </div>
     
