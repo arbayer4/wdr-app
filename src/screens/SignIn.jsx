@@ -41,7 +41,9 @@ export default function SignIn(props) {
         password: password,
       }
     },
-    {withCredentials: false}
+    {
+      'Content-Type': 'text/plain',
+      withCredentials: false}
     )
     .then(response => {
       if (response.data.logged_in) {
