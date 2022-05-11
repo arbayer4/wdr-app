@@ -36,7 +36,7 @@ function App() {
   }, [currentUser]);
 
   const handleLogout = () => {
-    API.delete("/logout", {withCredentials:true})
+    API.delete("/logout", {withCredentials: false})
     .then(response => {
       setCurrentUser(null);
     })

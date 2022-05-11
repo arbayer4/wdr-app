@@ -19,7 +19,7 @@ function InvitePlayers(props) {
     {
       invites: formData.invitedUsers
     },
-    {withCredentials: true}
+    {withCredentials: false}
     ).then(response => {
       console.log(response.data)
       setFormData({invitedUsers: ""})

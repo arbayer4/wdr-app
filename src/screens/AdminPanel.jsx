@@ -13,7 +13,7 @@ function AdminPanel(props) {
   useEffect(()=>{
     const getGames = async () => {
       try {
-        const resp = await API.get('/games', {withCredentials: true})
+        const resp = await API.get('/games', {withCredentials: false})
         console.log(resp);
         setGames(resp.data)
       }catch (error) {
@@ -22,7 +22,7 @@ function AdminPanel(props) {
     }
     const getPlayers = async () => {
       try {
-        const resp = await API.get('/users', {withCredentials: true})
+        const resp = await API.get('/users', {withCredentials: false})
         console.log(resp);
         setPlayers(resp.data.users)
       }catch (error) {
