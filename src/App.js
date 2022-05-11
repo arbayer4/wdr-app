@@ -19,7 +19,7 @@ function App() {
   useEffect(()=>{
     const handleVerify = async () => {
       try {
-        const resp = await API.get('/logged_in', {withCredentials: true})
+        const resp = await API.get('/logged_in', {withCredentials: false})
         setLoaded(true)
         if (resp.data.logged_in && !currentUser){
           console.log(resp)

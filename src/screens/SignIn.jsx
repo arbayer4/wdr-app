@@ -41,7 +41,7 @@ export default function SignIn(props) {
         password: password,
       }
     },
-    {withCredentials: true}
+    {withCredentials: false}
     )
     .then(response => {
       if (response.data.logged_in) {

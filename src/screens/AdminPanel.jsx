@@ -40,7 +40,7 @@ function AdminPanel(props) {
     {
       games: selectedDates
     },
-    {withCredentials: true}
+    {withCredentials: false}
     ).then(response => {
       console.log(response.data.games_created)
       setGames([...games, ...response.data.games_created])

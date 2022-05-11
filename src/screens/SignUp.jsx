@@ -51,7 +51,7 @@ export default function SignUp(props) {
         last_name: lastName
       }
     },
-    {withCredentials: true}
+    {withCredentials: false}
     )
     .then(response => {
       console.log(response)

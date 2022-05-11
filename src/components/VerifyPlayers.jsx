@@ -16,7 +16,7 @@ function VerifyPlayers(props) {
       {
         user_id: userId
       },
-      {withCredentials: true})
+      {withCredentials: false})
       props.setPlayers(props.players.map((player)=>{
         return player.id === resp.data?.user_verified?.id ? resp.data.user_verified : player
       }))

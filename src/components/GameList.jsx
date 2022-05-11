@@ -30,7 +30,7 @@ function GameList(props) {
         game_id: gameId,
         player_id: props.user.id
       },
-      {withCredentials: true})
+      {withCredentials: false})
       props.setGames(props.games.map((game)=> {
         if(game.id === gameId){
           const update = {...game, players: [...game["players"], resp.data.player]}
@@ -50,7 +50,7 @@ function GameList(props) {
         game_id: gameId,
         player_id: props.user.id
       },
-      {withCredentials: true})
+      {withCredentials: false})
       props.setGames(props.games.map((game)=> {
         if(game.id === gameId){
           const update = {...game, players: game["players"].filter(player=>player.id!==resp.data.player_id)}
