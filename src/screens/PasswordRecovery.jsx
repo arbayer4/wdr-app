@@ -3,7 +3,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import { Link as BRLink } from "react-router-dom";
+// import { Link as BRLink } from "react-router-dom";
 import Box from '@mui/material/Box';
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Typography from '@mui/material/Typography';
@@ -30,7 +30,7 @@ export default function PasswordRecovery(props) {
   }
   const handleSubmit = (event) => {
     event.preventDefault();
-    const {email, password} = formData;
+    const {email} = formData;
 
     API.post("/password-reset",
     {
@@ -42,6 +42,9 @@ export default function PasswordRecovery(props) {
     )
     .then(response => {
       setEmailSent(true)
+      if(emailSent) {
+        // do something
+      }
     })
   };
 

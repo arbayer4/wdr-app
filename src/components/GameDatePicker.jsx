@@ -13,7 +13,6 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';import List from
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import IconButton from '@mui/material/IconButton';
-import API from "../services/api-config";
 
 function GameDatePicker(props) {
   const [dateValue, setDateValue] = useState(new Date());

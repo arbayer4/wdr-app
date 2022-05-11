@@ -4,7 +4,7 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import API from "../services/api-config";
 import AddCircleOutlineTwoToneIcon from '@mui/icons-material/AddCircleOutlineTwoTone';
 import RemoveCircleTwoToneIcon from '@mui/icons-material/RemoveCircleTwoTone';
@@ -108,9 +108,9 @@ function GameList(props) {
         <AccordionDetails>
           <ul className="player-list">
             {game.players.map((player, index) =>(
-              <li key={index}>{`${index + 1}. ${player.firstname} ${player.lastname}  `}
+              <li style ={player.id===props.user.id ?{color:"green", fontWeight: "bold"}: null} key={index}>{`${index + 1}. ${player.firstname} ${player.lastname}  `}
                {index >= 15 && <Chip label="Waitlisted" color="error" variant="outlined" /> }
-               {player.id===props.user.id && <Chip label="Me" color="success" variant="outlined" /> }</li>
+               </li>
             ))}
           </ul>
         </AccordionDetails>

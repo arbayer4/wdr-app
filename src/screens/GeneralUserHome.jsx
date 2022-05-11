@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-import GameDatePicker from "../components/GameDatePicker";
 import GameList from "../components/GameList";
-import InvitePlayers from "../components/InvitePlayers";
 import API from "../services/api-config";
 import "./AdminPanel.css"
 
