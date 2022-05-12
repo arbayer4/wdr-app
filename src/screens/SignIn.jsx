@@ -30,26 +30,26 @@ export default function SignIn(props) {
       [name]: value,
     }))
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const {email, password} = formData;
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   const {email, password} = formData;
 
-    API.post("/sessions",
-    {
-      user: {
-        email: email,
-        password: password,
-      }
-    },
-    {Origin: "https://bloomingtonwdr.com",withCredentials: true}
-    )
-    .then(response => {
-      console.log(response)
-      if (response.data.logged_in) {
-        props.setCurrentUser(response.data.user)
-      }
-    })
-  };
+  //   API.post("/sessions",
+  //   {
+  //     user: {
+  //       email: email,
+  //       password: password,
+  //     }
+  //   },
+  //   {Origin: "https://bloomingtonwdr.com",withCredentials: true}
+  //   )
+  //   .then(response => {
+  //     console.log(response)
+  //     if (response.data.logged_in) {
+  //       props.setCurrentUser(response.data.user)
+  //     }
+  //   })
+  // };
 
   return (
     <ThemeProvider theme={theme}>
@@ -69,7 +69,10 @@ export default function SignIn(props) {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={(e)=>{
+            e.preventDefault();
+            props.handleLogin(formData)
+          }} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required

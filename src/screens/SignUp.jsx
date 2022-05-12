@@ -24,8 +24,8 @@ export default function SignUp(props) {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    firstName: "",
-    LastName: "",
+    firstname: "",
+    lastname: "",
     
   });
   const [emailError, setEmailError] = useState(false)
@@ -38,33 +38,7 @@ export default function SignUp(props) {
       [name]: value,
     }))
   }
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const {email, password, firstName, lastName} = formData;
-
-    API.post("/registrations",
-    {
-      user: {
-        email: email,
-        password: password,
-        first_name: firstName,
-        last_name: lastName
-      }
-    }
-    )
-    .then(response => {
-      console.log(response)
-      if (response.data.logged_in) {
-        setEmailError(false)
-        props.setCurrentUser(response.data.user)
-        navigate('/')
-      } else if (response.data.status === "conflict"){
-        setEmailError(true)
-      }
-    }).catch(err=>{
-      console.log(err)
-    })
-  };
+  
 
   return (
     <ThemeProvider theme={theme}>
@@ -84,17 +58,24 @@ export default function SignUp(props) {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={(e)=>{
+            e.preventDefault();
+            try {
+              props.handleRegister(formData);
+            } catch (error) {
+              console.log(error);
+            }
+          }} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
-                  name="firstName"
+                  name="firstname"
                   required
                   fullWidth
-                  id="firstName"
+                  id="firstname"
                   label="First Name"
-                  value = {formData.firstName}
+                  value = {formData.firstname}
                   onChange={handleChange}
                   autoFocus
                 />
@@ -105,9 +86,9 @@ export default function SignUp(props) {
                   fullWidth
                   id="lastName"
                   label="Last Name"
-                  name="lastName"
+                  name="lastname"
                   autoComplete="family-name"
-                  value = {formData.lastName}
+                  value = {formData.lastname}
                   onChange={handleChange}
                 />
               </Grid>
