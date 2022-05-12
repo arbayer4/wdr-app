@@ -44,6 +44,7 @@ export default function SignIn(props) {
     {Origin: "https://bloomingtonwdr.com",withCredentials: true}
     )
     .then(response => {
+      console.log(response)
       if (response.data.logged_in) {
         props.setCurrentUser(response.data.user)
       }
