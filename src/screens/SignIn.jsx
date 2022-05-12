@@ -40,10 +40,7 @@ export default function SignIn(props) {
         email: email,
         password: password,
       }
-    },
-    {
-      'Content-Type': 'text/plain',
-      withCredentials: false}
+    }
     )
     .then(response => {
       if (response.data.logged_in) {

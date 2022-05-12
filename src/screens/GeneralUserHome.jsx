@@ -9,7 +9,7 @@ function GeneralUserHome(props) {
   useEffect(()=>{
     const getGames = async () => {
       try {
-        const resp = await API.get('/games', {withCredentials: false})
+        const resp = await API.get('/games')
         console.log(resp);
         setGames(resp.data)
       }catch (error) {

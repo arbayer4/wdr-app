@@ -37,8 +37,7 @@ export default function PasswordRecovery(props) {
       user: {
         email: email,
       }
-    },
-    {withCredentials: false}
+    }
     )
     .then(response => {
       setEmailSent(true)

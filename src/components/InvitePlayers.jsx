@@ -18,8 +18,7 @@ function InvitePlayers(props) {
     await API.post("/invites",
     {
       invites: formData.invitedUsers
-    },
-    {withCredentials: false}
+    }
     ).then(response => {
       console.log(response.data)
       setFormData({invitedUsers: ""})

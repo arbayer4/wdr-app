@@ -50,8 +50,7 @@ export default function SignUp(props) {
         first_name: firstName,
         last_name: lastName
       }
-    },
-    {withCredentials: false}
+    }
     )
     .then(response => {
       console.log(response)

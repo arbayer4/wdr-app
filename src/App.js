@@ -19,7 +19,7 @@ function App() {
   useEffect(()=>{
     const handleVerify = async () => {
       try {
-        const resp = await API.get('/logged_in', {withCredentials: false})
+        const resp = await API.get('/logged_in')
         setLoaded(true)
         if (resp.data.logged_in && !currentUser){
           console.log(resp)
@@ -36,7 +36,7 @@ function App() {
   }, [currentUser]);
 
   const handleLogout = () => {
-    API.delete("/logout", {withCredentials: false})
+    API.delete("/logout")
     .then(response => {
       setCurrentUser(null);
     })

@@ -15,8 +15,7 @@ function VerifyPlayers(props) {
       const resp = await API.post('/user-verify',
       {
         user_id: userId
-      },
-      {withCredentials: false})
+      })
       props.setPlayers(props.players.map((player)=>{
         return player.id === resp.data?.user_verified?.id ? resp.data.user_verified : player
       }))
