@@ -26,7 +26,7 @@ export default function SignUp(props) {
     lastname: "",
     
   });
-  // const [emailError, setEmailError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
@@ -60,6 +60,7 @@ export default function SignUp(props) {
             try {
               props.handleRegister(formData);
             } catch (error) {
+              setEmailError(true)
               console.log(error);
             }
           }} sx={{ mt: 3 }}>
