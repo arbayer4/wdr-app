@@ -40,7 +40,8 @@ export default function SignIn(props) {
         email: email,
         password: password,
       }
-    }
+    },
+    {Origin: "https://bloomingtonwdr.com",withCredentials: true}
     )
     .then(response => {
       if (response.data.logged_in) {
