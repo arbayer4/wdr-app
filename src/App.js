@@ -1,7 +1,6 @@
 import './App.css';
 import {useState, useEffect} from "react";
 import SignIn from "./screens/SignIn";
-import API from "./services/api-config";
 import Layout from "./components/shared/layout/Layout";
 import AdminPanel from "./screens/AdminPanel";
 import { Route, Routes, useNavigate } from "react-router-dom";

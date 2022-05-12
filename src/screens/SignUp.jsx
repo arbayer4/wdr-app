@@ -13,8 +13,6 @@ import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from "react-router-dom";
-import API from "../services/api-config";
 
 
 
@@ -28,8 +26,7 @@ export default function SignUp(props) {
     lastname: "",
     
   });
-  const [emailError, setEmailError] = useState(false)
-  let navigate = useNavigate();
+  // const [emailError, setEmailError] = useState(false)
 
   const handleChange = (e) => {
     const {name, value} = e.target;
